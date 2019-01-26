@@ -17,7 +17,7 @@ class CategoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        MenuContoller.shared.fetchCategories { (categories) in
+        MenuController.shared.fetchCategories { (categories) in
             if let categories = categories {
                 self.updateUI(with: categories)
             }
