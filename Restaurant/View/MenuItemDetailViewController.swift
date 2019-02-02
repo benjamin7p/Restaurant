@@ -11,7 +11,7 @@ import UIKit
 class MenuItemDetailViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imageVIew: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextLabel: UILabel!
     @IBOutlet weak var addToOrderButton: UIButton!
@@ -29,6 +29,13 @@ class MenuItemDetailViewController: UIViewController {
         titleLabel.text = menuItem.name
         priceLabel.text = String(format: "$%.2f", menuItem.price)
         detailTextLabel.text = menuItem.detailText
+        
+        MenuController.shared.fetchImage(url: menuItem.imageURL) { (image) in
+            guard let image = image else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }
     }
     
     @IBAction func addToOrderButtonTapped(_ sender: UIButton) {
